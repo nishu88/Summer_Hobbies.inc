@@ -1,6 +1,6 @@
 package com.nishu.interrupt.zero.fr3efall.floatingwidget;
 
-package com.floatingwidget;
+
 import android.app.Service;
 import android.content.Intent;
 import android.graphics.PixelFormat;
@@ -11,15 +11,19 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.ImageView;
+
 public class FloatWidgetService extends Service {
     private WindowManager mWindowManager;
     private View mFloatingWidget;
+
     public FloatWidgetService() {
     }
+
     @Override
     public IBinder onBind(Intent intent) {
         return null;
     }
+
     @Override
     public void onCreate() {
         super.onCreate();
@@ -57,6 +61,7 @@ public class FloatWidgetService extends Service {
             private int initialY;
             private float initialTouchX;
             private float initialTouchY;
+
             @Override
             public boolean onTouch(View v, MotionEvent event) {
                 switch (event.getAction()) {
@@ -86,9 +91,11 @@ public class FloatWidgetService extends Service {
             }
         });
     }
+
     private boolean isViewCollapsed() {
         return mFloatingWidget == null || mFloatingWidget.findViewById(R.id.collapse_view).getVisibility() == View.VISIBLE;
     }
+
     @Override
     public void onDestroy() {
         super.onDestroy();
