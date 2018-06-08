@@ -99,6 +99,12 @@
             android:text="ORDER"
             android:id="@+id/order_button"
             android:onClick="orderClicked"/>
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="right"
+            android:text="NEXT"
+            android:id="@+id/next"/>
 
     </LinearLayout>
 
