@@ -1,15 +1,21 @@
 package com.nishu.interrupt.zero.fr3efall.justjava_coffeeorderingapp;
 
+import android.content.Intent;
+import android.net.Uri;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.TextView;
 
 public class MainActivity extends AppCompatActivity {
 
     int quantity = 0;
-    int prize = 10;
+    int prize = 45;
+    String emailAddress[]={"nishud3301@gmail.com"};
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,7 +50,9 @@ public class MainActivity extends AppCompatActivity {
     public void orderClicked(View view) {
         TextView amt_text_view=(TextView) findViewById(
                 R.id.bill);
-        String order="Name: Fr3EfaLL \n";
+        EditText personName=(EditText) findViewById(
+                R.id.name);
+        String order="Name: "+personName.getText().toString()+" \n";
         order=order+"Quantity: "+quantity;
         amt_text_view.setText(order);
 
@@ -56,7 +64,21 @@ public class MainActivity extends AppCompatActivity {
                 R.id.order_button);
         but.setText("Order Complete");
 
+        composeEmail(emailAddress,"Coffee order for Mr/Ms. "+personName.getText().toString(),order);
 
+
+    }
+
+
+    public void composeEmail(String[] addresses, String subject,String summary) {
+        Intent intent = new Intent(Intent.ACTION_SENDTO);
+        intent.setData(Uri.parse("mailto:")); // only email apps should handle this
+        intent.putExtra(Intent.EXTRA_EMAIL, addresses);
+        intent.putExtra(Intent.EXTRA_SUBJECT, subject);
+        intent.putExtra(Intent.EXTRA_TEXT,summary);
+        if (intent.resolveActivity(getPackageManager()) != null) {
+            startActivity(intent);
+        }
     }
 
 
