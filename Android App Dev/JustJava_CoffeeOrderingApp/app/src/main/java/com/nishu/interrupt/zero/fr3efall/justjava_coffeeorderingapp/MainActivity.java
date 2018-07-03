@@ -6,15 +6,16 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.TextView;
 
 public class MainActivity extends AppCompatActivity {
 
-    int quantity = 0;
-    int prize = 45;
+    int quantity=0;
+    int prize = 50;
     String emailAddress[]={"nishud3301@gmail.com"};
-
+    int extrasCreamTotal,extrasChocolateTotal;
 
 
     @Override
@@ -39,13 +40,15 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void display(int num) {
+        int total;
         TextView quantity_text_view = (TextView) findViewById(
                 R.id.quantity_num);
         quantity_text_view.setText("" + num);
 
         TextView amount_text_view = (TextView) findViewById(
                 R.id.amount);
-        amount_text_view.setText("Rs. " + (quantity * prize));
+        total=quantity*(prize+extrasChocolateTotal+extrasCreamTotal);
+        amount_text_view.setText("Rs. " + total);
 
     }
 
@@ -93,6 +96,22 @@ public class MainActivity extends AppCompatActivity {
             }
         });
     }
+
+   public void extras(View view){
+       CheckBox extraCream=(CheckBox) findViewById(R.id.whippedCream);
+       CheckBox extraChocolate=(CheckBox) findViewById(R.id.chocolate);
+
+        if(extraCream.isChecked()){
+            extrasCreamTotal=10;
+        }
+        else
+            extrasCreamTotal=0;
+        if(extraChocolate.isChecked()){
+            extrasChocolateTotal=20;
+        }
+        else
+            extrasChocolateTotal=0;
+   }
 
 
 }
